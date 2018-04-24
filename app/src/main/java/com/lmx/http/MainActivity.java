@@ -8,10 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import com.example.httplibrary.IDataListener;
-import com.example.httplibrary.Lmx;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
