@@ -1,4 +1,4 @@
-package com.example.httplibrary;
+package com.lmx.http;
 
 import java.io.BufferedOutputStream;
 import java.io.InputStream;

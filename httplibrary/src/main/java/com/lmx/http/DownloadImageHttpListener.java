@@ -1,4 +1,4 @@
-package com.example.httplibrary;
+package com.lmx.http;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
