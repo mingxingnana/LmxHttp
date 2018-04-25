@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         image = findViewById(R.id.image);
         text6 = findViewById(R.id.text6);
 
-
     }
 
 
