@@ -49,7 +49,7 @@ public class JsonHttpService implements IHttpService {
             urlConnection.setDoInput(true);//设置这个是否可以写入数据
             urlConnection.setDoOutput(true);//设置这个是否可以输出数据
             urlConnection.setRequestMethod("POST");
-            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            urlConnection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
             if (requestData != null) {
                 urlConnection.setRequestProperty("Content-Length", String.valueOf(requestData.length));
             }

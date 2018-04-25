@@ -6,9 +6,9 @@ package com.lmx.http;
  * 返回结果处理
  */
 
-public interface IDataListener<M> {
+public interface IDataListener {
 
-    void onSuccess(M m);
+    void onSuccess(String m);
 
     void onFailure();
 

@@ -13,14 +13,14 @@ import java.io.InputStream;
  * //下载图片
  */
 
-public class DownloadFileHttpListener<M> implements IHttpListener {
+public class DownloadFileHttpListener implements IHttpListener {
 
     protected Handler handler = new Handler(Looper.getMainLooper());
 
     protected String filename, path;
-    protected IDataListener<M> dataListener;
+    protected IDataListener dataListener;
 
-    public DownloadFileHttpListener(String path, String filename, IDataListener<M> dataListener) {
+    public DownloadFileHttpListener(String path, String filename, IDataListener dataListener) {
         this.filename = filename;
         this.path = path;
         this.dataListener = dataListener;
@@ -48,7 +48,7 @@ public class DownloadFileHttpListener<M> implements IHttpListener {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            dataListener.onSuccess((M) apkFile);
+                            dataListener.onSuccess(apkFile);
                         }
                     });
 

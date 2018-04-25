@@ -19,9 +19,6 @@ public abstract class HttpCallback<Result> implements ICallback {
         onSucess(obresult);
     }
 
-    /**
-     * 高级泛型获取Result的类型
-     */
     protected Class<?> any(Object object) {
         Type genericSuperclass = object.getClass().getGenericSuperclass();
         Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass).getActualTypeArguments();
@@ -32,10 +29,10 @@ public abstract class HttpCallback<Result> implements ICallback {
 
     public abstract void onSucess(Result result);
 
-    public abstract void onFail(String error);
+    public abstract void onFailure();
 
     @Override
     public void onFailure(String error) {
-        onFail(error);
+        onFailure();
     }
 }

@@ -1,5 +1,8 @@
 package com.lmx.httpagent;
 
+import android.widget.ImageView;
+
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -10,11 +13,9 @@ public class HttpHelper implements IHttpProcessor {
     private static HttpHelper ourInstance;
 
     public static HttpHelper obtion() {
-        if (ourInstance == null) {
-            synchronized (HttpHelper.class) {
-                if (ourInstance == null) {
-                    ourInstance = new HttpHelper();
-                }
+        synchronized (HttpHelper.class) {
+            if (ourInstance == null) {
+                ourInstance = new HttpHelper();
             }
         }
         return ourInstance;
@@ -23,9 +24,9 @@ public class HttpHelper implements IHttpProcessor {
     private HttpHelper() {
     }
 
-    public static IHttpProcessor mIhttpProcessor = null;
+    private static IHttpProcessor mIhttpProcessor = null;
 
-    public static void init(IHttpProcessor m) {
+    protected static void init(IHttpProcessor m) {
         mIhttpProcessor = m;
     }
 
@@ -39,8 +40,26 @@ public class HttpHelper implements IHttpProcessor {
                 url = url + "&" + entry.getKey() + "=" + entry.getValue();
             }
         }
-        if (mIhttpProcessor == null)
-            throw new RuntimeException("your IHttpProcessor is not initialized,please in your appcaction initialized");
-        mIhttpProcessor.post(url, parmas, iCallback);
+        if (mIhttpProcessor != null)
+            mIhttpProcessor.post(url, parmas, iCallback);
+    }
+
+    @Override
+    public void uploadFile(File file, String url, ICallback iCallback) {
+        if (mIhttpProcessor != null)
+            mIhttpProcessor.uploadFile(file, url, iCallback);
+    }
+
+    @Override
+    public void downloadFile(String path, String filename, String url, ICallback iCallback) {
+        if (mIhttpProcessor != null)
+            mIhttpProcessor.downloadFile(path, filename, url, iCallback);
+
+    }
+
+    @Override
+    public void downloadImage(String path, ImageView imageView) {
+        if (mIhttpProcessor != null)
+            mIhttpProcessor.downloadImage(path, imageView);
     }
 }

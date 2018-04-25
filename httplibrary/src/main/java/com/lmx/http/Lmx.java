@@ -14,11 +14,10 @@ public class Lmx {
      *
      * @param requestinfo  请求参数
      * @param url          请求的url
-     * @param reponce      javaBean文件，用于返回结果的转换
      * @param dataListener 返回结果的监听事件
      */
-    public static <T, M> void sendJsonRequest(T requestinfo, String url, Class<M> reponce, IDataListener<M> dataListener) {
-        IHttpListener httpListener = new JsonHttpListener<>(dataListener, reponce);
+    public static <T> void sendJsonRequest(T requestinfo, String url, IDataListener dataListener) {
+        IHttpListener httpListener = new JsonHttpListener(dataListener);
         IHttpService httpService = new JsonHttpService();
         HttpTast<T> httpTast = new HttpTast<>(requestinfo, url, httpService, httpListener);
         ThreadPoolManager.getInstance().execute(httpTast);
@@ -40,7 +39,7 @@ public class Lmx {
     /**
      * 下载文件
      */
-    public static <T, M> void sendJsonRequest(String path, String filename, String url, IDataListener<M> dataListener) {
+    public static <T> void sendJsonRequest(String path, String filename, String url, IDataListener dataListener) {
         IHttpListener httpListener = new DownloadFileHttpListener(path, filename, dataListener);
         IHttpService httpService = new JsonHttpService();
         HttpTast<T> httpTast = new HttpTast<>(null, url, httpService, httpListener);
@@ -50,8 +49,8 @@ public class Lmx {
     /**
      * 上传文件
      */
-    public static <T, M> void sendJsonRequest2(File file, String url, Class<M> reponce, IDataListener<M> dataListener) {
-        IHttpListener httpListener = new JsonHttpListener(dataListener, reponce);
+    public static <T> void sendJsonRequest2(File file, String url, IDataListener dataListener) {
+        IHttpListener httpListener = new JsonHttpListener(dataListener);
         IHttpService httpService = new UploadImageHttpService(file);
         HttpTast<T> httpTast = new HttpTast<>(null, url, httpService, httpListener);
         ThreadPoolManager.getInstance().execute(httpTast);
