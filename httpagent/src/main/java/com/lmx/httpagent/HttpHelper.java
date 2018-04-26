@@ -13,9 +13,11 @@ public class HttpHelper implements IHttpProcessor {
     private static HttpHelper ourInstance;
 
     public static HttpHelper obtion() {
-        synchronized (HttpHelper.class) {
-            if (ourInstance == null) {
-                ourInstance = new HttpHelper();
+        if (ourInstance == null) {
+            synchronized (HttpHelper.class) {
+                if (ourInstance == null) {
+                    ourInstance = new HttpHelper();
+                }
             }
         }
         return ourInstance;
@@ -62,4 +64,5 @@ public class HttpHelper implements IHttpProcessor {
         if (mIhttpProcessor != null)
             mIhttpProcessor.downloadImage(path, imageView);
     }
+
 }

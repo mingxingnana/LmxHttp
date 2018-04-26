@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lmx.httpagent.HttpHelper;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,13 +30,12 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         image = findViewById(R.id.image);
         text6 = findViewById(R.id.text6);
-
     }
 
 
     private void downloadfile() {
         String url = "http://image244.nginx.cqbornsoft.com:5601/uploadfile/images/2018-03/20/110_1965962487.apk";
-        Lmx.sendJsonRequest("/sdcard/Lmx/", "lmx.apk", url, new IDataListener<String>() {
+        Lmx.sendJsonRequest("/sdcard/Lmx/", "lmx.apk", url, new IDataListener() {
             @Override
             public void onSuccess(String s) {
 
@@ -57,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
         String url = "http://thy.nginx.cqbornsoft.com:5601/app/verifyUser.htm";
         Map<String, String> jsonObject = new HashMap<>();
         jsonObject.put("userName", "18623092375");
-        Lmx.sendJsonRequest(jsonObject, url, dataclass.class, new IDataListener<dataclass>() {
+        Lmx.sendJsonRequest(jsonObject, url, new IDataListener() {
             @Override
-            public void onSuccess(dataclass data) {
+            public void onSuccess(String data) {
 
 
-                text6.setText(data.toString());
+                text6.setText(data);
             }
 
             @Override
@@ -74,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void get() {
         String url = "http://thy.nginx.cqbornsoft.com:5601/app/scenicList.htm";
-        Lmx.sendJsonRequest(null, url, SienceData.class, new IDataListener<SienceData>() {
+        Lmx.sendJsonRequest(null, url, new IDataListener() {
             @Override
-            public void onSuccess(SienceData data) {
+            public void onSuccess(String data) {
 
                 text6.setText(data.toString());
             }
@@ -112,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
     private void upfile() {
         String url = "http://thy.nginx.cqbornsoft.com:5601/app/imagesUpload.htm";
         File file = new File("/sdcard/Lmx/image.png");
-        Lmx.sendJsonRequest2(file, url, dataclass.class, new IDataListener<dataclass>() {
+        Lmx.sendJsonRequest2(file, url, new IDataListener() {
             @Override
-            public void onSuccess(dataclass data) {
+            public void onSuccess(String data) {
 
                 text6.setText(data.toString());
             }
