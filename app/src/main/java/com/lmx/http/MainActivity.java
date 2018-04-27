@@ -1,7 +1,9 @@
 package com.lmx.http;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -9,9 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lmx.httpagent.HttpHelper;
+import com.lmx.utils.hook.AMSHookUtil;
+import com.lmx.utils.hook.IntentLietener;
+import com.lmx.utils.loadingdailog.MProgressDialog;
+import com.lmx.utils.permission.PermissionListener;
+import com.lmx.utils.updateapp.UpdateManger;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -97,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     public void post(View view) {
         post();
     }
+
 
     public void downimage(View view) {
         downloadimage();

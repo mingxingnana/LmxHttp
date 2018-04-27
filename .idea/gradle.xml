@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/httpagent" />
             <option value="$PROJECT_DIR$/httplibrary" />
+            <option value="$PROJECT_DIR$/utilslibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
