@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lmx.httpagent.HttpCallback;
 import com.lmx.httpagent.HttpHelper;
 import com.lmx.utils.hook.AMSHookUtil;
 import com.lmx.utils.hook.IntentLietener;
@@ -44,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void downloadfile() {
         String url = "http://image244.nginx.cqbornsoft.com:5601/uploadfile/images/2018-03/20/110_1965962487.apk";
-        Lmx.sendJsonRequest("/sdcard/Lmx/", "lmx.apk", url, new IDataListener() {
-            @Override
-            public void onSuccess(String s) {
 
+        HttpHelper.obtion().downloadFile("/sdcard/Lmx/", "lmx.apk", url, new HttpCallback<String>() {
+            @Override
+            public void onSucess(String s) {
                 text6.setText("下载文件成功,保存路径:" + s);
             }
 
@@ -60,19 +61,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void downloadimage() {
         String url = "http://image244.nginx.cqbornsoft.com:5601/uploadfile/images/2018-02/08/110_927437889.jpg";
-        Lmx.sendJsonRequest(url, image);
+        HttpHelper.obtion().downloadImage(url, image);
     }
 
     private void post() {
         String url = "http://thy.nginx.cqbornsoft.com:5601/app/verifyUser.htm";
-        Map<String, String> jsonObject = new HashMap<>();
+        Map<String, Object> jsonObject = new HashMap<>();
         jsonObject.put("userName", "18623092375");
-        Lmx.sendJsonRequest(jsonObject, url, new IDataListener() {
+        HttpHelper.obtion().post(url, jsonObject, new HttpCallback<String>() {
             @Override
-            public void onSuccess(String data) {
-
-
-                text6.setText(data);
+            public void onSucess(String s) {
+                text6.setText(s);
             }
 
             @Override
@@ -80,15 +79,15 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("data1", "onFailure");
             }
         });
+
     }
 
     private void get() {
         String url = "http://thy.nginx.cqbornsoft.com:5601/app/scenicList.htm";
-        Lmx.sendJsonRequest(null, url, new IDataListener() {
+        HttpHelper.obtion().post(url, null, new HttpCallback<String>() {
             @Override
-            public void onSuccess(String data) {
-
-                text6.setText(data.toString());
+            public void onSucess(String s) {
+                text6.setText(s.toString());
             }
 
             @Override
@@ -98,6 +97,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void upfile() {
+
+        String url = "http://thy.nginx.cqbornsoft.com:5601/app/imagesUpload.htm";
+        File file = new File("/sdcard/Lmx/image.png");
+        HttpHelper.obtion().uploadFile(file, url, new HttpCallback<String>() {
+            @Override
+            public void onSucess(String s) {
+
+                text6.setText(s.toString());
+            }
+
+            @Override
+            public void onFailure() {
+                text6.setText("上传文件失败");
+            }
+        });
+    }
 
     public void get(View view) {
         get();
@@ -120,20 +136,4 @@ public class MainActivity extends AppCompatActivity {
         upfile();
     }
 
-    private void upfile() {
-        String url = "http://thy.nginx.cqbornsoft.com:5601/app/imagesUpload.htm";
-        File file = new File("/sdcard/Lmx/image.png");
-        Lmx.sendJsonRequest2(file, url, new IDataListener() {
-            @Override
-            public void onSuccess(String data) {
-
-                text6.setText(data.toString());
-            }
-
-            @Override
-            public void onFailure() {
-                text6.setText("上传文件失败");
-            }
-        });
-    }
 }
