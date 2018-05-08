@@ -61,6 +61,7 @@ public class DensityUtil {
         int width = wm.getDefaultDisplay().getWidth();
         return width;
     }
+
     public static int getWindowHeight(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         int Height = wm.getDefaultDisplay().getHeight();
