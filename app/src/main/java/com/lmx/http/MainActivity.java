@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         image = findViewById(R.id.image);
         text6 = findViewById(R.id.text6);
+
     }
 
 
